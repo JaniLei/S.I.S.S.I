@@ -44,8 +44,8 @@ public:
 
 protected:
 
-	UPROPERTY(EditAnywhere)
-	USceneComponent* EnemyRoot;
+	//UPROPERTY(EditAnywhere)
+	//USceneComponent* EnemyRoot;
 
 	UPROPERTY(EditAnywhere)
 	UBoxComponent* EnemyBox;

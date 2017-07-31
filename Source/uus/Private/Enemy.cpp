@@ -10,13 +10,13 @@ AEnemy::AEnemy()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	EnemyRoot = CreateDefaultSubobject<USceneComponent>(TEXT("EnemyRoot"));
-	RootComponent = EnemyRoot;
+	//EnemyRoot = CreateDefaultSubobject<USceneComponent>(TEXT("EnemyRoot"));
+	//RootComponent = EnemyRoot;
 
 	EnemyBox = CreateDefaultSubobject<UBoxComponent>(TEXT("EnemyBox"));
 	EnemyBox->SetBoxExtent(FVector(40, 0, 40));
 	EnemyBox->bGenerateOverlapEvents = true;
-	EnemyBox->SetupAttachment(EnemyRoot);
+	EnemyBox->SetupAttachment(RootComponent);
 
 	Health = 1;
 	CanDropItems = true;
