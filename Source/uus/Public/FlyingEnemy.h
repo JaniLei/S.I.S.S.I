@@ -47,7 +47,7 @@ protected:
 	bool IsHit;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool PlayerFound;
-	UPROPERTY(EditAnywhere)
+
 	float AttackInterval;
 
 	float RunningTime;

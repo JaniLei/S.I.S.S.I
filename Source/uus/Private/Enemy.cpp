@@ -16,7 +16,7 @@ AEnemy::AEnemy()
 	EnemyBox = CreateDefaultSubobject<UBoxComponent>(TEXT("EnemyBox"));
 	EnemyBox->SetBoxExtent(FVector(40, 0, 40));
 	EnemyBox->bGenerateOverlapEvents = true;
-	EnemyBox->SetupAttachment(RootComponent);
+	EnemyBox->SetupAttachment(EnemyRoot);
 
 	Health = 1;
 	CanDropItems = true;
