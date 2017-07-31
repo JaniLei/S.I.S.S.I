@@ -2,7 +2,6 @@
 
 #include "FlyingEnemy.h"
 #include "uus.h"
-#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 
 
@@ -30,7 +29,6 @@ void AFlyingEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
-	PlayerCharacter = Cast<AMyMainCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 
 }
 
@@ -41,13 +39,11 @@ void AFlyingEnemy::Tick(float DeltaTime)
 
 	if (EnemyState != EEnemyState::Dead)
 	{
-		EnemyLocation = GetActorLocation();
 
 		CheckDirection();
 
 		if (PlayerCharacter)
 		{
-			PlayerLocation = PlayerCharacter->GetActorLocation();
 
 			if (!IsHit)
 			{
@@ -70,7 +66,7 @@ void AFlyingEnemy::Tick(float DeltaTime)
 
 void AFlyingEnemy::Movement(float DeltaTime)
 {
-	if (EnemyState == EEnemyState::Moving && PlayerFound)
+	if (EnemyState == EEnemyState::Moving && PlayerFound && LineTraceToPlayer())
 	{
 		FVector PlayerDirection = FVector(PlayerLocation.X, 0, PlayerLocation.Z + 180) - EnemyLocation;
 		PlayerDirection.Normalize();

@@ -2,6 +2,7 @@
 
 #include "Enemy.h"
 #include "uus.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AEnemy::AEnemy()
@@ -26,6 +27,7 @@ void AEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
+	PlayerCharacter = Cast<AMyMainCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 }
 
 // Called every frame
@@ -33,6 +35,17 @@ void AEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+
+	if (EnemyState != EEnemyState::Dead)
+	{
+		EnemyLocation = GetActorLocation();
+
+
+		if (PlayerCharacter)
+		{
+			PlayerLocation = PlayerCharacter->GetActorLocation();
+		}
+	}
 }
 
 void AEnemy::DamageEnemy(int32 Amount)
@@ -77,4 +90,31 @@ void AEnemy::SpawnDrop()
 			APickUp* PickUpDrop = GetWorld()->SpawnActor<APickUp>(Drop, GetActorTransform(), SpawnParams);
 		}
 	}
+}
+
+bool AEnemy::LineTraceToPlayer()
+{
+	FCollisionQueryParams RV_TraceParams = FCollisionQueryParams(FName(TEXT("RV_Trace")), true, this);
+	RV_TraceParams.bTraceComplex = true;
+	RV_TraceParams.bTraceAsyncScene = true;
+	RV_TraceParams.bReturnPhysicalMaterial = false;
+
+	//Re-initialize hit info
+	FHitResult RV_Hit(ForceInit);
+
+	//call GetWorld() from within an actor extending class
+	GetWorld()->LineTraceSingleByChannel(RV_Hit, EnemyLocation, PlayerLocation, ECC_Pawn, RV_TraceParams);
+
+	if (RV_Hit.bBlockingHit)
+	{
+		if (RV_Hit.GetActor()->IsA(AMyMainCharacter::StaticClass()))
+		{
+			AMyMainCharacter* HitPlayer = Cast<AMyMainCharacter>(RV_Hit.GetActor());
+			if (HitPlayer)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 }
