@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "MyMainCharacter.h"
 #include "Enemy.h"
 #include "FlyingEnemy.generated.h"
 
@@ -39,12 +38,9 @@ protected:
 	TSubclassOf<AActor> ProjectileBP;
 
 	FVector MovementVector;
-	FVector EnemyLocation;
-	FVector PlayerLocation;
 	FVector LastLocation;
 	FVector FloatingLocation;
 
-	AMyMainCharacter* PlayerCharacter;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool IsShooting;

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "PickUp.h"
+#include "MyMainCharacter.h"
 #include "GameFramework/Actor.h"
 #include "PaperFlipbookComponent.h"
 #include "Components/BoxComponent.h"
@@ -21,7 +22,7 @@ enum class EEnemyState : uint8
 };
 
 UCLASS()
-class UUS_API AEnemy : public AActor
+class UUS_API AEnemy : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -52,6 +53,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enum)
 	EEnemyState EnemyState;
 
+
+	FVector EnemyLocation;
+	FVector PlayerLocation;
+
+	AMyMainCharacter* PlayerCharacter;
+
 	UPROPERTY(EditAnyWhere, BluePrintReadWrite)
 	int32 Health;
 
@@ -66,6 +73,9 @@ protected:
 
 
 	void SpawnDrop();
+
+	UFUNCTION(BlueprintCallable)
+	bool LineTraceToPlayer();
 
 };
 
