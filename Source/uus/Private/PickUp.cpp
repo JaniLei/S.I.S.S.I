@@ -17,6 +17,7 @@ APickUp::APickUp()
 	PickUpBox->SetBoxExtent(FVector(30, 0, 30));
 	PickUpBox->bGenerateOverlapEvents = true;
 	PickUpBox->OnComponentBeginOverlap.AddDynamic(this, &APickUp::OnPlayerEnterPickUpBox);
+	PickUpBox->SetupAttachment(RootComponent);
 
 	PickUpSprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("PickUpSprite"));
 
