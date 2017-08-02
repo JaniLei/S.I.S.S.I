@@ -10,14 +10,6 @@ AElevator::AElevator()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	//ElevatorRoot = CreateDefaultSubobject<USceneComponent>(TEXT("ElevatorRoot"));
-	//RootComponent = ElevatorRoot;
-
-	//TriggerBox = CreateDefaultSubobject<UBoxComponent>(TEXT("TriggerBox"));
-	//TriggerBox->bGenerateOverlapEvents = true;
-	//TriggerBox->OnComponentBeginOverlap.AddDynamic(this, &AElevator::OnPlayerEnterTriggerBox);
-	//AttachToComponent(ElevatorRoot, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-
 	Speed = 100;
 	Distance = 400;
 }
@@ -38,7 +30,6 @@ void AElevator::BeginPlay()
 		}
 	}
 
-	//lowPosition = GetActorLocation();
 	LowPosition = PlatformSprite->GetComponentLocation();
 
 	HighPosition = LowPosition;

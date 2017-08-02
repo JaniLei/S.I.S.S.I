@@ -17,8 +17,6 @@ class UUS_API ANukeUsablePickUp : public AUsablePickUp
 
 public:
 
-	ANukeUsablePickUp();
-
 	virtual void UseItem() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sprite")

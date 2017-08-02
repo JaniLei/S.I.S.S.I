@@ -12,22 +12,27 @@ AExplosion::AExplosion()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	ExplosionRoot = CreateDefaultSubobject<USceneComponent>(TEXT("ExplosionRoot"));
-	RootComponent = ExplosionRoot;
+	//ExplosionRoot = CreateDefaultSubobject<USceneComponent>(TEXT("ExplosionRoot"));
+	//RootComponent = ExplosionRoot;
 
-	ExplosionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("ExplosionBox"));
-	ExplosionBox->SetBoxExtent(FVector(20, 0, 20));
-	ExplosionBox->bGenerateOverlapEvents = true;
-	ExplosionBox->OnComponentBeginOverlap.AddDynamic(this, &AExplosion::OnPlayerEnterExplosionBox);
+	//ExplosionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("ExplosionBox"));
+	//ExplosionBox->SetBoxExtent(FVector(20, 0, 20));
+	//ExplosionBox->bGenerateOverlapEvents = true;
+	//ExplosionBox->OnComponentBeginOverlap.AddDynamic(this, &AExplosion::OnPlayerEnterExplosionBox);
 
-	ExplosionSprite = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("ExplosionSprite"));
+	//ExplosionSprite = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("ExplosionSprite"));
 }
 
 // Called when the game starts or when spawned
 void AExplosion::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	TArray<UBoxComponent*> BoxComps;
+	GetComponents<UBoxComponent>(BoxComps);
+	ExplosionBox = BoxComps[0];
+
+	ExplosionBox->OnComponentBeginOverlap.AddDynamic(this, &AExplosion::OnPlayerEnterExplosionBox);
 }
 
 // Called every frame

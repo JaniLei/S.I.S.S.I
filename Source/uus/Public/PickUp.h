@@ -29,11 +29,11 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Collision")
 	UBoxComponent* PickUpBox;
 
-	UPROPERTY(EditAnywhere)
-	USceneComponent* PickUpRoot;
+	//UPROPERTY(EditAnywhere)
+	//USceneComponent* PickUpRoot;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sprite")
-	UPaperSpriteComponent* PickUpSprite;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sprite")
+	//UPaperSpriteComponent* PickUpSprite;
 
 protected:
 

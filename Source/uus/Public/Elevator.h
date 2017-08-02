@@ -12,13 +12,6 @@ class UUS_API AElevator : public AActor
 {
 	GENERATED_BODY()
 
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Collision", meta = (AllowPrivateAccess = "true"))
-	//class USceneComponent* ElevatorRoot;
-
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Collision", meta = (AllowPrivateAccess = "true"))
-	//class UBoxComponent* TriggerBox;
-
-
 public:
 	// Sets default values for this actor's properties
 	AElevator();

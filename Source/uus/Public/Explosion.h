@@ -19,14 +19,14 @@ public:
 	AExplosion();
 
 
-	UPROPERTY(EditAnywhere)
-	USceneComponent* ExplosionRoot;
+	//UPROPERTY(EditAnywhere)
+	//USceneComponent* ExplosionRoot;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Collision")
 	UBoxComponent* ExplosionBox;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sprite")
-	UPaperFlipbookComponent* ExplosionSprite;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sprite")
+	//UPaperFlipbookComponent* ExplosionSprite;
 
 protected:
 	// Called when the game starts or when spawned

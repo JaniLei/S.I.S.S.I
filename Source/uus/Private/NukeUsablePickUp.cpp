@@ -5,11 +5,6 @@
 #include "Enemy.h"
 
 
-ANukeUsablePickUp::ANukeUsablePickUp()
-{
-	NukeFlash = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("NukeFlash"));
-}
-
 void ANukeUsablePickUp::UseItem()
 {
 	Super::UseItem();
