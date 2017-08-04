@@ -22,28 +22,35 @@ void ASpawnerEnemy::BeginPlay()
 
 	//PlayerCharacter = Cast<AMainCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 
-	GetWorldTimerManager().SetTimer(SpawnTimerHandle, this, &ASpawnerEnemy::SpawnEnemy, SpawnInterval, true);
+	//GetWorldTimerManager().SetTimer(SpawnTimerHandle, this, &ASpawnerEnemy::SpawnEnemy, SpawnInterval, true);
 }
 
 void ASpawnerEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//if (GetHorizontalDistanceTo(PlayerCharacter) < 500 && !PlayerFound)
-	//{
-	//	// start spawning enemies at set intervals(in seconds)
-	//	GetWorldTimerManager().SetTimer(SpawnTimerHandle, this, &ASpawnerEnemy::SpawnEnemy, SpawnInterval, true);
-	//	PlayerFound = true;
-	//}
+	FVector DistanceVector = PlayerLocation - EnemyLocation;
+
+	// if player is within "sight" range(400)
+	if (DistanceVector.X < 800 && DistanceVector.X > -800 &&
+		DistanceVector.Z < 800 && DistanceVector.Z > -800 && !PlayerFound)
+	{
+		GetWorldTimerManager().SetTimer(SpawnTimerHandle, this, &ASpawnerEnemy::SpawnEnemy, SpawnInterval, true);
+		PlayerFound = true;
+	}
 }
 
 void ASpawnerEnemy::SpawnEnemy()
 {
+	FTransform SpawnTransform;
+	FVector ActorLocation = GetActorLocation();
+	SpawnTransform.SetLocation(FVector(FMath::FRandRange(ActorLocation.X - 20, ActorLocation.X + 20), 0, FMath::FRandRange(ActorLocation.Z - 20, ActorLocation.Z + 20)));
+
 	if (EnemiesToSpawn == 0)
 	{
 		// infinite spawning
 		FActorSpawnParameters SpawnParams;
-		AEnemy* EnemyActor = GetWorld()->SpawnActor<AEnemy>(EnemyBP, GetActorTransform(), SpawnParams);
+		AEnemy* EnemyActor = GetWorld()->SpawnActor<AEnemy>(EnemyBP, SpawnTransform, SpawnParams);
 	}
 	else
 	{
@@ -52,7 +59,7 @@ void ASpawnerEnemy::SpawnEnemy()
 		{
 			// spawn enemy
 			FActorSpawnParameters SpawnParams;
-			AEnemy* EnemyActor = GetWorld()->SpawnActor<AEnemy>(EnemyBP, GetActorTransform(), SpawnParams);
+			AEnemy* EnemyActor = GetWorld()->SpawnActor<AEnemy>(EnemyBP, SpawnTransform, SpawnParams);
 
 			SpawnedEnemies++;
 		}

@@ -65,12 +65,17 @@ protected:
 	UPROPERTY(EditAnyWhere, BluePrintReadWrite)
 	int32 Damage;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	bool PlayerFound;
+
 	UPROPERTY(EditAnywhere, Category = "ItemDrops")
 	bool CanDropItems;
 
 	UPROPERTY(EditAnywhere, BluePrintReadWrite, Category = "ItemDrops")
 	TArray<TSubclassOf <APickUp>> DropTable;
 
+
+	bool LookForPlayer();
 
 	void SpawnDrop();
 

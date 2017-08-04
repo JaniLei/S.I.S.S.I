@@ -45,8 +45,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool IsShooting;
 	bool IsHit;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	bool PlayerFound;
+	
 
 	float AttackInterval;
 
@@ -60,7 +59,6 @@ protected:
 
 	virtual void CheckDirection();
 
-	bool LookForPlayer();
 
 	UFUNCTION()
 	virtual void OnPlayerEnterAttackBox(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

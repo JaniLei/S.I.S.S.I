@@ -105,27 +105,6 @@ void AFlyingEnemy::CheckDirection()
 	LastLocation = EnemyLocation;
 }
 
-bool AFlyingEnemy::LookForPlayer()
-{
-	FVector DistanceVector = PlayerLocation - EnemyLocation;
-
-	// if player is within "sight" range(400)
-	if (DistanceVector.X < 400 && DistanceVector.X > -400 &&
-		DistanceVector.Z < 400 && DistanceVector.Z > -400)
-	{
-		if (EnemyState == EEnemyState::Idle)
-		{
-			EnemyState = EEnemyState::Moving;
-		}
-		return true;
-	}
-	else
-	{
-		EnemyState = EEnemyState::Idle;
-		return false;
-	}
-}
-
 void AFlyingEnemy::OnPlayerEnterAttackBox(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
 	if (EnemyState != EEnemyState::Dead)

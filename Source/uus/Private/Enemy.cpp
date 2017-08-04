@@ -72,6 +72,27 @@ void AEnemy::EnemyDeath()
 	}*/
 }
 
+bool AEnemy::LookForPlayer()
+{
+	FVector DistanceVector = PlayerLocation - EnemyLocation;
+
+	// if player is within "sight" range(400)
+	if (DistanceVector.X < 500 && DistanceVector.X > -500 &&
+		DistanceVector.Z < 500 && DistanceVector.Z > -500)
+	{
+		if (EnemyState == EEnemyState::Idle)
+		{
+			EnemyState = EEnemyState::Moving;
+		}
+		return true;
+	}
+	else
+	{
+		EnemyState = EEnemyState::Idle;
+		return false;
+	}
+}
+
 void AEnemy::SpawnDrop()
 {
 	if (DropTable.Num() > 0)

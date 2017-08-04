@@ -3,6 +3,8 @@
 #include "MyMainCharacter.h"
 #include "uus.h"
 #include "UsablePickUp.h"
+#include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMathLibrary.h"
 
 
 AMyMainCharacter::AMyMainCharacter()
@@ -23,6 +25,7 @@ void AMyMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	ShieldSprite->SetVisibility(false);
 }
 
@@ -31,6 +34,7 @@ void AMyMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	//SetActorRotation(GetAimDirection());
 }
 
 // Called to bind functionality to input
@@ -39,6 +43,29 @@ void AMyMainCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerIn
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	PlayerInputComponent->BindAction("UseItem", IE_Pressed, this, &AMyMainCharacter::UseItem);
+}
+
+FRotator AMyMainCharacter::GetAimDirection()
+{
+	// get mouse position
+	float LocationX;
+	float LocationY;
+	PC->GetMousePosition(LocationX, LocationY);
+	FVector MousePosition(LocationX, 0, LocationY);
+
+	//const FVector2D ViewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
+	//FVector ScreenCenter = FVector(ViewportSize.X / 2, 0, ViewportSize.Y / 2);
+
+	//FVector Pos;
+	//FVector Dir;
+	//PC->DeprojectMousePositionToWorld(Pos, Dir);
+	//FRotator TargetRotation = Dir.Rotation();
+	// get player rotation to mouse
+
+	FRotator ShootRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), GetActorLocation() + MousePosition);
+	FRotator NewRot(-ShootRotation.Pitch, GetActorRotation().Yaw, GetActorRotation().Roll);
+
+	return NewRot;
 }
 
 void AMyMainCharacter::AddAmmo(int32 Amount)

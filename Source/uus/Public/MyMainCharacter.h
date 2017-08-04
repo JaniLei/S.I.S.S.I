@@ -27,6 +27,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	AUsablePickUp* UsableItem;
 
+	APlayerController* PC;
+
 	FTimerHandle ShieldTimerHandle;
 	FTimerHandle DoubleDamageTimerHandle;
 
@@ -51,6 +53,8 @@ protected:
 
 	UFUNCTION(BlueprintCallable)
 	void UseItem();
+	UFUNCTION(BlueprintCallable)
+	FRotator GetAimDirection();
 
 public:
 
