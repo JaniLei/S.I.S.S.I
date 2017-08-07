@@ -9,6 +9,16 @@
 
 class AUsablePickUp;
 
+
+UENUM(BlueprintType)
+enum class EAimingState : uint8
+{
+	Forward 	UMETA(DisplayName = "Forward"),
+	Up			UMETA(DisplayName = "Up"),
+	UpAngle		UMETA(DisplayName = "UpAngle"),
+	DownAngle 	UMETA(DisplayName = "DownAngle")
+};
+
 /**
  * 
  */
@@ -26,6 +36,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	AUsablePickUp* UsableItem;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enum)
+	EAimingState AimingState;
 
 	APlayerController* PC;
 

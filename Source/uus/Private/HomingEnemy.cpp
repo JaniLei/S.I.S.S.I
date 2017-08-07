@@ -25,8 +25,21 @@ void AHomingEnemy::Tick(float DeltaSeconds)
 	}
 }
 
+void AHomingEnemy::CheckDirectionToPlayer()
+{
+	if (EnemyLocation.X >= PlayerLocation.X)
+	{
+		SetActorRotation(FRotator(0, 0, 0));
+	}
+	else
+	{
+		SetActorRotation(FRotator(0, 180, 0));
+	}
+}
+
 void AHomingEnemy::Movement()
 {
+	CheckDirectionToPlayer();
 	FVector Direction = PlayerLocation - EnemyLocation;
 	Direction.Normalize();
 	Direction.X *= Speed;

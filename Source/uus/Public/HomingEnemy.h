@@ -28,6 +28,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Speed;
 
+	void CheckDirectionToPlayer();
+
 	void Movement();
 	
 };

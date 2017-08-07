@@ -3,11 +3,14 @@
 #include "NukeUsablePickUp.h"
 #include "EngineUtils.h"
 #include "Enemy.h"
+#include "Kismet/GameplayStatics.h"
 
 
 void ANukeUsablePickUp::UseItem()
 {
 	Super::UseItem();
+
+	ShakeScreen();
 
 	for (TActorIterator<AEnemy> ActorItr(GetWorld()); ActorItr; ++ActorItr)
 	{
@@ -15,29 +18,21 @@ void ANukeUsablePickUp::UseItem()
 		AEnemy *Enemy = *ActorItr;
 
 		const FVector2D ViewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
-		FVector PlayerPos = PlayerCharacter->GetActorLocation();
-		FVector ScreenToPlayerMax = FVector(PlayerPos.X + (ViewportSize.X / 2), 0, PlayerPos.Z + (ViewportSize.Y / 2));
-		FVector ScreenToPlayerMin = FVector(PlayerPos.X - (ViewportSize.X / 2), 0, PlayerPos.Z - (ViewportSize.Y / 2));
 		FVector EnemyPos = ActorItr->GetActorLocation();
+		FVector2D EnemyOnScreen;
 
-		if (EnemyPos.X < ScreenToPlayerMax.X && EnemyPos.X > ScreenToPlayerMin.X &&
-			EnemyPos.Z < ScreenToPlayerMax.Z && EnemyPos.Z > ScreenToPlayerMin.Z)
+		UGameplayStatics::ProjectWorldToScreen(UGameplayStatics::GetPlayerController(GetWorld(), 0), EnemyPos, EnemyOnScreen);
+
+		if (EnemyOnScreen.X > 0 && EnemyOnScreen.X < ViewportSize.X &&
+			EnemyOnScreen.Y > 0 && EnemyOnScreen.Y < ViewportSize.Y)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Boom!"));
 			if (!ActorItr->IsPendingKill())
 			{
 				ActorItr->EnemyDeath();
 			}
 		}
-		// Check to see if enemy has been rendered recently (if it is on screen)
-		/*if (ActorItr->GetLastRenderTime() > 0.01f)
-		{
-			if (!ActorItr->IsPendingKill())
-			{
-				ActorItr->Destroy();
-			}
-		}*/
 	}
-
 }
+
+void ANukeUsablePickUp::ShakeScreen_Implementation() { }
 
