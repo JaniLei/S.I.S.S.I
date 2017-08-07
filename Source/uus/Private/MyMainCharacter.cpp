@@ -34,7 +34,7 @@ void AMyMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//SetActorRotation(GetAimDirection());
+	SetActorRotation(GetAimDirection());
 }
 
 // Called to bind functionality to input
@@ -53,8 +53,28 @@ FRotator AMyMainCharacter::GetAimDirection()
 	PC->GetMousePosition(LocationX, LocationY);
 	FVector MousePosition(LocationX, 0, LocationY);
 
-	//const FVector2D ViewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
-	//FVector ScreenCenter = FVector(ViewportSize.X / 2, 0, ViewportSize.Y / 2);
+	FVector PlayerPos = GetActorLocation();
+	FVector2D PlayerOnScreen;
+	UGameplayStatics::ProjectWorldToScreen(PC, PlayerPos, PlayerOnScreen);
+
+	const FVector2D ViewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
+	FVector ScreenCenter = FVector(ViewportSize.X / 2, 0, ViewportSize.Y / 2);
+
+	FRotator TestRot;
+	float Offset = ViewportSize.Y / 4;
+
+	if (MousePosition.Z > PlayerOnScreen.Y + Offset)
+	{
+		TestRot.Pitch = 325;
+	}
+	else if (MousePosition.Z < PlayerOnScreen.Y - Offset)
+	{
+		TestRot.Pitch = 45;
+	}
+	else
+	{
+		TestRot.Pitch = 0;
+	}
 
 	//FVector Pos;
 	//FVector Dir;
@@ -62,8 +82,9 @@ FRotator AMyMainCharacter::GetAimDirection()
 	//FRotator TargetRotation = Dir.Rotation();
 	// get player rotation to mouse
 
-	FRotator ShootRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), GetActorLocation() + MousePosition);
-	FRotator NewRot(-ShootRotation.Pitch, GetActorRotation().Yaw, GetActorRotation().Roll);
+	//FRotator ShootRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), GetActorLocation() - MousePosition);
+
+	FRotator NewRot(TestRot.Pitch, GetActorRotation().Yaw, GetActorRotation().Roll);
 
 	return NewRot;
 }

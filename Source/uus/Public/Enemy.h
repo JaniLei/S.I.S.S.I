@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "PickUp.h"
 #include "MyMainCharacter.h"
 #include "GameFramework/Actor.h"
 #include "PaperFlipbookComponent.h"
@@ -72,7 +71,7 @@ protected:
 	bool CanDropItems;
 
 	UPROPERTY(EditAnywhere, BluePrintReadWrite, Category = "ItemDrops")
-	TArray<TSubclassOf <APickUp>> DropTable;
+	TArray<TSubclassOf <AActor>> DropTable;
 
 
 	bool LookForPlayer();

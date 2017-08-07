@@ -108,7 +108,7 @@ void AEnemy::SpawnDrop()
 		if (Drop)
 		{
 			FActorSpawnParameters SpawnParams;
-			APickUp* PickUpDrop = GetWorld()->SpawnActor<APickUp>(Drop, GetActorTransform(), SpawnParams);
+			AActor* PickUpDrop = GetWorld()->SpawnActor<AActor>(Drop, GetActorTransform(), SpawnParams);
 		}
 	}
 }

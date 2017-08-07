@@ -53,6 +53,7 @@ protected:
 
 	UFUNCTION(BlueprintCallable)
 	void UseItem();
+	/** Get rotation from player towards mouse*/
 	UFUNCTION(BlueprintCallable)
 	FRotator GetAimDirection();
 
