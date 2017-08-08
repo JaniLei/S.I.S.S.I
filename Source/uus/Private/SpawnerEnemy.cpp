@@ -12,7 +12,7 @@ ASpawnerEnemy::ASpawnerEnemy()
 
 	PlayerFound = false;
 
-	//Health = ?;
+	Health = 100;
 	//CanDropItems = ?;
 }
 

@@ -16,7 +16,7 @@ AMyMainCharacter::AMyMainCharacter()
 
 	MaxHealth = 100;
 	Health = MaxHealth;
-	Damage = 1;
+	Damage = 10;
 	DamageMultiplier = 1;
 }
 
@@ -61,7 +61,7 @@ FRotator AMyMainCharacter::GetAimDirection()
 	FVector ScreenCenter = FVector(ViewportSize.X / 2, 0, ViewportSize.Y / 2);
 
 	FRotator TestRot;
-	float Offset = 150; //ViewportSize.Y / 4;
+	float Offset = 64; //ViewportSize.Y / 4;
 
 	if (MousePosition.Z > PlayerOnScreen.Y + Offset)
 	{
@@ -130,17 +130,17 @@ void AMyMainCharacter::AddArmor(int32 Amount)
 	}
 }
 
-void AMyMainCharacter::AddShield(int32 Amount)
+void AMyMainCharacter::AddShield_Implementation(int32 Amount)
 {
 	Shield = Amount;
 	GetWorldTimerManager().SetTimer(ShieldTimerHandle, this, &AMyMainCharacter::EndShield, 30, false);
-	ShieldSprite->SetVisibility(true);
+	//ShieldSprite->SetVisibility(true);
 }
 
-void AMyMainCharacter::EndShield()
+void AMyMainCharacter::EndShield_Implementation()
 {
 	Shield = 0;
-	ShieldSprite->SetVisibility(false);
+	//ShieldSprite->SetVisibility(false);
 }
 
 void AMyMainCharacter::ActivateDoubleDamage_Implementation()
@@ -171,7 +171,7 @@ void AMyMainCharacter::AddDamageMitigation(float Amount)
 void AMyMainCharacter::AddDamageMultiplier(float Amount)
 {
 	DamageMultiplier += Amount;
-	if (DamageMultiplier < 2)
+	if (DamageMultiplier > 2)
 	{
 		DamageMultiplier = 2;
 	}

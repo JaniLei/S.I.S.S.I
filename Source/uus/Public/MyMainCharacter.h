@@ -94,7 +94,9 @@ public:
 	void AddAmmo(int32 Amount);
 	void AddHealth(int32 Amount);
 	void AddArmor(int32 Amount);
+	UFUNCTION(BlueprintNativeEvent)
 	void AddShield(int32 Amount);
+	UFUNCTION(BlueprintNativeEvent)
 	void EndShield();
 	UFUNCTION(BlueprintNativeEvent)
 	void ActivateDoubleDamage();
