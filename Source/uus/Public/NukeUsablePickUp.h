@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UsablePickUp.h"
+#include "Explosion.h"
 #include "NukeUsablePickUp.generated.h"
 
 /**
@@ -17,16 +18,12 @@ class UUS_API ANukeUsablePickUp : public AUsablePickUp
 
 public:
 
+	UFUNCTION(BlueprintNativeEvent)
+	void ShakeScreen();
+
 	virtual void UseItem() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sprite")
 	UPaperFlipbookComponent* NukeFlash;
-
-protected:
-
-	/** nuke object to spawn when this item is used*/
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<AActor> NukeBP;
-	
 	
 };

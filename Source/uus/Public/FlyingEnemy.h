@@ -45,7 +45,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool IsShooting;
 	bool IsHit;
-	
 
 	float AttackInterval;
 
@@ -55,10 +54,10 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "EnemyVariables")
 	float Speed;
 
+
 	virtual void Movement(float DeltaTime);
 
 	virtual void CheckDirection();
-
 
 	UFUNCTION()
 	virtual void OnPlayerEnterAttackBox(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

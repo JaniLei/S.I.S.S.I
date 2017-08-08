@@ -43,9 +43,6 @@ public:
 
 protected:
 
-	//UPROPERTY(EditAnywhere)
-	//USceneComponent* EnemyRoot;
-
 	UPROPERTY(EditAnywhere)
 	UBoxComponent* EnemyBox;
 
@@ -55,6 +52,7 @@ protected:
 
 	FVector EnemyLocation;
 	FVector PlayerLocation;
+
 
 	AMyMainCharacter* PlayerCharacter;
 

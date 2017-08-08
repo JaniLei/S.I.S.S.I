@@ -34,7 +34,7 @@ void AMyMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	SetActorRotation(GetAimDirection());
+	//SetActorRotation(GetAimDirection());
 }
 
 // Called to bind functionality to input
@@ -61,18 +61,29 @@ FRotator AMyMainCharacter::GetAimDirection()
 	FVector ScreenCenter = FVector(ViewportSize.X / 2, 0, ViewportSize.Y / 2);
 
 	FRotator TestRot;
-	float Offset = ViewportSize.Y / 4;
+	float Offset = 150; //ViewportSize.Y / 4;
 
 	if (MousePosition.Z > PlayerOnScreen.Y + Offset)
 	{
-		TestRot.Pitch = 325;
+		AimingState = EAimingState::DownAngle;
+		TestRot.Pitch = 315;
 	}
 	else if (MousePosition.Z < PlayerOnScreen.Y - Offset)
 	{
-		TestRot.Pitch = 45;
+		if (MousePosition.X < PlayerOnScreen.X + Offset && MousePosition.X > PlayerOnScreen.X - Offset)
+		{
+			AimingState = EAimingState::Up;
+			TestRot.Pitch = 90;
+		}
+		else
+		{
+			AimingState = EAimingState::UpAngle;
+			TestRot.Pitch = 45;
+		}
 	}
 	else
 	{
+		AimingState = EAimingState::Forward;
 		TestRot.Pitch = 0;
 	}
 
