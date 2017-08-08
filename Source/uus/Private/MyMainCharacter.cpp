@@ -12,10 +12,8 @@ AMyMainCharacter::AMyMainCharacter()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	ShieldSprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("ShieldSprite"));
-
 	MaxHealth = 100;
-	Health = MaxHealth;
+	PlayerHealth = MaxHealth;
 	Damage = 10;
 	DamageMultiplier = 1;
 }
@@ -24,8 +22,19 @@ AMyMainCharacter::AMyMainCharacter()
 void AMyMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+
+	TArray<UPaperSpriteComponent*> SpriteComps;
+	GetComponents<UPaperSpriteComponent>(SpriteComps);
+
+	for (int i = 0; i < SpriteComps.Num(); i++)
+	{
+		if (SpriteComps[i]->GetName() == "ShieldPaperSprite")
+		{
+			ShieldSprite = SpriteComps[i];
+		}
+	}
 	ShieldSprite->SetVisibility(false);
 }
 
@@ -114,10 +123,10 @@ void AMyMainCharacter::AddAmmo(int32 Amount)
 
 void AMyMainCharacter::AddHealth(int32 Amount)
 {
-	while (Amount > 0 && Health < 100)
+	while (Amount > 0 && PlayerHealth < 100)
 	{
 		Amount--;
-		Health++;
+		PlayerHealth++;
 	}
 }
 
@@ -130,17 +139,17 @@ void AMyMainCharacter::AddArmor(int32 Amount)
 	}
 }
 
-void AMyMainCharacter::AddShield_Implementation(int32 Amount)
+void AMyMainCharacter::AddShield(int32 Amount)
 {
 	Shield = Amount;
 	GetWorldTimerManager().SetTimer(ShieldTimerHandle, this, &AMyMainCharacter::EndShield, 30, false);
-	//ShieldSprite->SetVisibility(true);
+	ShieldSprite->SetVisibility(true);
 }
 
-void AMyMainCharacter::EndShield_Implementation()
+void AMyMainCharacter::EndShield()
 {
 	Shield = 0;
-	//ShieldSprite->SetVisibility(false);
+	ShieldSprite->SetVisibility(false);
 }
 
 void AMyMainCharacter::ActivateDoubleDamage_Implementation()
@@ -156,7 +165,7 @@ void AMyMainCharacter::EndDoubleDamage_Implementation()
 
 void AMyMainCharacter::FullHeal_Implementation()
 {
-	Health = MaxHealth;
+	PlayerHealth = MaxHealth;
 }
 
 void AMyMainCharacter::AddDamageMitigation(float Amount)

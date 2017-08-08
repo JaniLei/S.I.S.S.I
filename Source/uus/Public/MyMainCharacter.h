@@ -49,8 +49,8 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	int32 Ammo;
-	UPROPERTY(EditAnywhere)
-	int32 Health;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float PlayerHealth;
 	int32 MaxHealth;
 	UPROPERTY(EditAnywhere)
 	int32 Armor;
@@ -94,9 +94,7 @@ public:
 	void AddAmmo(int32 Amount);
 	void AddHealth(int32 Amount);
 	void AddArmor(int32 Amount);
-	UFUNCTION(BlueprintNativeEvent)
 	void AddShield(int32 Amount);
-	UFUNCTION(BlueprintNativeEvent)
 	void EndShield();
 	UFUNCTION(BlueprintNativeEvent)
 	void ActivateDoubleDamage();
@@ -123,8 +121,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	int32 GetScaledPlayerDamage();
 
-	UFUNCTION(BlueprintCallable)
-	int32 GetHealth() { return Health; }
 	UFUNCTION(BlueprintCallable)
 	int32 GetMaxHealth() { return MaxHealth; }
 	
