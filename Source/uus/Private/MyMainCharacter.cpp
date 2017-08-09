@@ -235,7 +235,7 @@ void AMyMainCharacter::UseItem()
 	}
 }
 
-int32 AMyMainCharacter::DamagePlayer(int32 DamageAmount)
+float AMyMainCharacter::DamagePlayer(float DamageAmount)
 {
 	int32 DamageMitigated = FMath::RoundToInt(DamageAmount / (1 - DamageMitigation));
 	int32 DamageToPlayer = DamageAmount - DamageMitigated;
