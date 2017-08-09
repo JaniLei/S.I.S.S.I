@@ -35,7 +35,10 @@ void AMyMainCharacter::BeginPlay()
 			ShieldSprite = SpriteComps[i];
 		}
 	}
-	ShieldSprite->SetVisibility(false);
+	if (ShieldSprite)
+	{
+		ShieldSprite->SetVisibility(false);
+	}
 }
 
 // Called every frame
@@ -143,13 +146,19 @@ void AMyMainCharacter::AddShield(int32 Amount)
 {
 	Shield = Amount;
 	GetWorldTimerManager().SetTimer(ShieldTimerHandle, this, &AMyMainCharacter::EndShield, 30, false);
-	ShieldSprite->SetVisibility(true);
+	if (ShieldSprite)
+	{
+		ShieldSprite->SetVisibility(true);
+	}
 }
 
 void AMyMainCharacter::EndShield()
 {
 	Shield = 0;
-	ShieldSprite->SetVisibility(false);
+	if (ShieldSprite)
+	{
+		ShieldSprite->SetVisibility(false);
+	}
 }
 
 void AMyMainCharacter::ActivateDoubleDamage_Implementation()

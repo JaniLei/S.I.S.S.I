@@ -20,8 +20,6 @@ void ASpawnerEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//PlayerCharacter = Cast<AMainCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-
 	//GetWorldTimerManager().SetTimer(SpawnTimerHandle, this, &ASpawnerEnemy::SpawnEnemy, SpawnInterval, true);
 }
 

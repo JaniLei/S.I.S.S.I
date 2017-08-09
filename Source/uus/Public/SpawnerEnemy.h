@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Enemy.h"
-#include "MainCharacter.h"
 #include "SpawnerEnemy.generated.h"
 
 /**
@@ -41,9 +40,6 @@ protected:
 	int32 SpawnedEnemies;
 
 	void SpawnEnemy();
-
-	AMainCharacter* PlayerCharacter;
-	bool PlayerFound;
 
 private:
 
