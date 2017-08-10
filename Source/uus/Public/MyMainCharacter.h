@@ -52,7 +52,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 PlayerHealth;
 	int32 MaxHealth;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Armor;
 	UPROPERTY(EditAnywhere)
 	int32 Shield;
