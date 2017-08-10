@@ -14,6 +14,7 @@ ASpawnerEnemy::ASpawnerEnemy()
 
 	Health = 100;
 	//CanDropItems = ?;
+	LoSDistance = 800;
 }
 
 void ASpawnerEnemy::BeginPlay()
@@ -29,11 +30,11 @@ void ASpawnerEnemy::Tick(float DeltaTime)
 
 	FVector DistanceVector = PlayerLocation - EnemyLocation;
 
-	// if player is within "sight" range(400)
-	if (DistanceVector.X < 800 && DistanceVector.X > -800 &&
-		DistanceVector.Z < 800 && DistanceVector.Z > -800 && !PlayerFound)
+	// if player is within line of sight range
+	if (DistanceVector.X < LoSDistance && DistanceVector.X > -LoSDistance &&
+		DistanceVector.Z < LoSDistance && DistanceVector.Z > -LoSDistance && !PlayerFound)
 	{
-		GetWorldTimerManager().SetTimer(SpawnTimerHandle, this, &ASpawnerEnemy::SpawnEnemy, SpawnInterval, true);
+		GetWorldTimerManager().SetTimer(SpawnTimerHandle, this, &ASpawnerEnemy::SpawnEnemy, SpawnInterval, true, SpawnInterval);
 		PlayerFound = true;
 	}
 }
@@ -42,7 +43,7 @@ void ASpawnerEnemy::SpawnEnemy()
 {
 	FTransform SpawnTransform;
 	FVector ActorLocation = GetActorLocation();
-	SpawnTransform.SetLocation(FVector(FMath::FRandRange(ActorLocation.X - 20, ActorLocation.X + 20), 0, FMath::FRandRange(ActorLocation.Z - 20, ActorLocation.Z + 20)));
+	SpawnTransform.SetLocation(FVector(FMath::FRandRange(ActorLocation.X - 40, ActorLocation.X + 40), 0, FMath::FRandRange(ActorLocation.Z - 40, ActorLocation.Z + 40)));
 
 	if (EnemiesToSpawn == 0)
 	{

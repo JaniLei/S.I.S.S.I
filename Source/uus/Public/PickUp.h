@@ -29,12 +29,6 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Collision")
 	UBoxComponent* PickUpBox;
 
-	//UPROPERTY(EditAnywhere)
-	//USceneComponent* PickUpRoot;
-
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sprite")
-	//UPaperSpriteComponent* PickUpSprite;
-
 protected:
 
 	/** The amount of ammo/health/etc the pickup gives*/
