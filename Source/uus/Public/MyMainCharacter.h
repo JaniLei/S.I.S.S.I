@@ -47,16 +47,16 @@ protected:
 
 	FString PickUpName;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Ammo;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float PlayerHealth;
+	int32 PlayerHealth;
 	int32 MaxHealth;
 	UPROPERTY(EditAnywhere)
 	int32 Armor;
 	UPROPERTY(EditAnywhere)
 	int32 Shield;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Damage;
 
 	/** reduced damage taken*/
@@ -110,7 +110,7 @@ public:
 	void AddUsableItem(AUsablePickUp* Item);
 
 	UFUNCTION(BlueprintCallable)
-	float DamagePlayer(float DamageAmount);
+	int32 DamagePlayer(int32 DamageAmount);
 
 	void PlayerDeath();
 
