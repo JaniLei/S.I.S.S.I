@@ -2,7 +2,6 @@
 
 #include "Elevator.h"
 #include "Components/BoxComponent.h"
-#include "MainCharacter.h"
 
 
 AElevator::AElevator()

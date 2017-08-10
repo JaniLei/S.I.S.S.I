@@ -18,7 +18,7 @@ void AHomingEnemy::Tick(float DeltaSeconds)
 		{
 			PlayerFound = LookForPlayer();
 		}
-		if (PlayerFound)
+		if (PlayerFound && LineTraceToPlayer())
 		{
 			Movement();
 		}

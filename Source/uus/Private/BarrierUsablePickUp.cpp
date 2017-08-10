@@ -24,6 +24,6 @@ void ABarrierUsablePickUp::UseItem()
 	{
 		OffsetX = 100;
 	}
-	BarrierTransform.SetLocation(FVector(BarrierTransform.GetLocation().X + OffsetX, 0, BarrierTransform.GetLocation().Z /*+ 25*/));
+	BarrierTransform.SetLocation(FVector(BarrierTransform.GetLocation().X + OffsetX, 0, BarrierTransform.GetLocation().Z + 20));
 	ABarrier* SpawnedBarrier = GetWorld()->SpawnActor<ABarrier>(BarrierBP, BarrierTransform, SpawnParams);
 }

@@ -53,6 +53,9 @@ protected:
 	FVector EnemyLocation;
 	FVector PlayerLocation;
 
+	UPROPERTY(BlueprintReadOnly)
+	FTimerHandle LineTimerHandle;
+
 
 	AMyMainCharacter* PlayerCharacter;
 

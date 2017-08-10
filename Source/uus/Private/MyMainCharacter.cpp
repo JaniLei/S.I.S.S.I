@@ -12,11 +12,9 @@ AMyMainCharacter::AMyMainCharacter()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	ShieldSprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("ShieldSprite"));
-
 	MaxHealth = 100;
-	Health = MaxHealth;
-	Damage = 1;
+	PlayerHealth = MaxHealth;
+	Damage = 10;
 	DamageMultiplier = 1;
 }
 
@@ -24,9 +22,23 @@ AMyMainCharacter::AMyMainCharacter()
 void AMyMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-	ShieldSprite->SetVisibility(false);
+
+	TArray<UPaperSpriteComponent*> SpriteComps;
+	GetComponents<UPaperSpriteComponent>(SpriteComps);
+
+	for (int i = 0; i < SpriteComps.Num(); i++)
+	{
+		if (SpriteComps[i]->GetName() == "ShieldPaperSprite")
+		{
+			ShieldSprite = SpriteComps[i];
+		}
+	}
+	if (ShieldSprite)
+	{
+		ShieldSprite->SetVisibility(false);
+	}
 }
 
 // Called every frame
@@ -61,7 +73,7 @@ FRotator AMyMainCharacter::GetAimDirection()
 	FVector ScreenCenter = FVector(ViewportSize.X / 2, 0, ViewportSize.Y / 2);
 
 	FRotator TestRot;
-	float Offset = 150; //ViewportSize.Y / 4;
+	float Offset = 64; //ViewportSize.Y / 4;
 
 	if (MousePosition.Z > PlayerOnScreen.Y + Offset)
 	{
@@ -114,10 +126,10 @@ void AMyMainCharacter::AddAmmo(int32 Amount)
 
 void AMyMainCharacter::AddHealth(int32 Amount)
 {
-	while (Amount > 0 && Health < 100)
+	while (Amount > 0 && PlayerHealth < 100)
 	{
 		Amount--;
-		Health++;
+		PlayerHealth++;
 	}
 }
 
@@ -134,13 +146,19 @@ void AMyMainCharacter::AddShield(int32 Amount)
 {
 	Shield = Amount;
 	GetWorldTimerManager().SetTimer(ShieldTimerHandle, this, &AMyMainCharacter::EndShield, 30, false);
-	ShieldSprite->SetVisibility(true);
+	if (ShieldSprite)
+	{
+		ShieldSprite->SetVisibility(true);
+	}
 }
 
 void AMyMainCharacter::EndShield()
 {
 	Shield = 0;
-	ShieldSprite->SetVisibility(false);
+	if (ShieldSprite)
+	{
+		ShieldSprite->SetVisibility(false);
+	}
 }
 
 void AMyMainCharacter::ActivateDoubleDamage_Implementation()
@@ -156,7 +174,7 @@ void AMyMainCharacter::EndDoubleDamage_Implementation()
 
 void AMyMainCharacter::FullHeal_Implementation()
 {
-	Health = MaxHealth;
+	PlayerHealth = MaxHealth;
 }
 
 void AMyMainCharacter::AddDamageMitigation(float Amount)
@@ -171,7 +189,7 @@ void AMyMainCharacter::AddDamageMitigation(float Amount)
 void AMyMainCharacter::AddDamageMultiplier(float Amount)
 {
 	DamageMultiplier += Amount;
-	if (DamageMultiplier < 2)
+	if (DamageMultiplier > 2)
 	{
 		DamageMultiplier = 2;
 	}
@@ -217,7 +235,7 @@ void AMyMainCharacter::UseItem()
 	}
 }
 
-int32 AMyMainCharacter::DamagePlayer(int32 DamageAmount)
+float AMyMainCharacter::DamagePlayer(float DamageAmount)
 {
 	int32 DamageMitigated = FMath::RoundToInt(DamageAmount / (1 - DamageMitigation));
 	int32 DamageToPlayer = DamageAmount - DamageMitigated;
