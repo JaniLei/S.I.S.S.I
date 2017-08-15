@@ -45,12 +45,18 @@ void APickUp::Tick(float DeltaTime)
 	SetActorLocation(GetActorLocation() + FloatingLocation);
 }
 
+void APickUp::OnPickUp_Implementation()
+{
+
+}
+
 void APickUp::OnPlayerEnterPickUpBox(UPrimitiveComponent * OverlappedComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
 	AMyMainCharacter* const TestPlayer = Cast <AMyMainCharacter>(OtherActor);
 	
 	if (TestPlayer)
 	{
+		OnPickUp();
 		PlayerCharacter = TestPlayer;
 	}
 }
