@@ -110,7 +110,7 @@ public:
 	void AddUsableItem(AUsablePickUp* Item);
 
 	UFUNCTION(BlueprintCallable)
-	int32 DamagePlayer(int32 DamageAmount);
+	void DamagePlayer(int32 DamageAmount);
 
 	void PlayerDeath();
 
