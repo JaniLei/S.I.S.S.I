@@ -41,6 +41,9 @@ protected:
 
 	AMyMainCharacter* PlayerCharacter;
 
+	UFUNCTION(BlueprintNativeEvent)
+	void OnPickUp();
+
 	UFUNCTION()
 	virtual void OnPlayerEnterPickUpBox(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
