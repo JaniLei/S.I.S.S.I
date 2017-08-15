@@ -237,14 +237,13 @@ void AMyMainCharacter::UseItem()
 
 int32 AMyMainCharacter::DamagePlayer(int32 DamageAmount)
 {
-	int32 DamageMitigated = FMath::RoundToInt(DamageAmount / (1 - DamageMitigation));
+	int32 DamageMitigated = FMath::RoundToInt(DamageAmount * DamageMitigation);
 	int32 DamageToPlayer = DamageAmount - DamageMitigated;
 
-	
 
 	// check & damage shield
-/*
-	while (Shield > 0 || DamageToPlayer > 0)
+
+	/*while (Shield > 0 || DamageToPlayer > 0)
 	{
 		DamageToPlayer--;
 		Shield--;
@@ -254,12 +253,15 @@ int32 AMyMainCharacter::DamagePlayer(int32 DamageAmount)
 	{
 		DamageToPlayer--;
 		Armor--;
-	}*/
+	}
 	// damage player health
 	if (DamageToPlayer > 0)
 	{
 		PlayerHealth -= DamageToPlayer;
-	}
+	}*/
+
+	PlayerHealth -= DamageToPlayer;
+
 	return DamageToPlayer;
 }
 
