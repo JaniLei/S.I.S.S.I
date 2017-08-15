@@ -19,7 +19,7 @@ class UUS_API ANukeUsablePickUp : public AUsablePickUp
 public:
 
 	UFUNCTION(BlueprintNativeEvent)
-	void ShakeScreen();
+	void ScreenFlash();
 
 	virtual void UseItem() override;
 

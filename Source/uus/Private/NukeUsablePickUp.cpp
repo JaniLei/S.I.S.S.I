@@ -10,7 +10,7 @@ void ANukeUsablePickUp::UseItem()
 {
 	Super::UseItem();
 
-	ShakeScreen();
+	ScreenFlash();
 
 	for (TActorIterator<AEnemy> ActorItr(GetWorld()); ActorItr; ++ActorItr)
 	{
@@ -34,5 +34,5 @@ void ANukeUsablePickUp::UseItem()
 	}
 }
 
-void ANukeUsablePickUp::ShakeScreen_Implementation() { }
+void ANukeUsablePickUp::ScreenFlash_Implementation() { }
 
