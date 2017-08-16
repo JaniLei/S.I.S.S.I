@@ -56,12 +56,12 @@ void AEnemy::DamageEnemy(int32 Amount)
 
 void AEnemy::EnemyDeath()
 {
-	EnemyState = EEnemyState::Dead;
 	// item drops / score
-	if (CanDropItems)
+	if (CanDropItems && EnemyState != EEnemyState::Dead)
 	{
 		SpawnDrop();
 	}
+	EnemyState = EEnemyState::Dead;
 	// destroy enemy
 	/*if (!IsPendingKill())
 	{

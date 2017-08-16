@@ -60,7 +60,7 @@ void AGreenBug::Attack()
 		// set spawned projectiles location position and rotation towards player
 		FTransform SpawnTransform;
 		FRotator NewRot;
-		if (IsBat)
+		/*if (IsBat)
 		{
 			FRotator PlayerRot = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), PlayerLocation);
 			PlayerRot.Pitch = FMath::ClampAngle(PlayerRot.Pitch, 300.f, 340.f);
@@ -69,7 +69,12 @@ void AGreenBug::Attack()
 		else
 		{
 			NewRot = FRotator(320, GetActorRotation().Yaw + 180, 0);
-		}
+		}*/
+
+		FRotator PlayerRot = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), PlayerLocation);
+		PlayerRot.Pitch = FMath::ClampAngle(PlayerRot.Pitch, 300.f, 340.f);
+		NewRot = FRotator(PlayerRot.Pitch, GetActorRotation().Yaw + 180, 0);
+
 		SpawnTransform.SetLocation(GetActorLocation());
 		SpawnTransform.SetRotation(NewRot.Quaternion());
 		AActor* ProjectileActor = GetWorld()->SpawnActor<AActor>(ProjectileBP, SpawnTransform, SpawnParams);
