@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "UsablePickUp.h"
-#include "Explosion.h"
 #include "NukeUsablePickUp.generated.h"
 
 /**
@@ -22,8 +21,5 @@ public:
 	void ScreenFlash();
 
 	virtual void UseItem() override;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sprite")
-	UPaperFlipbookComponent* NukeFlash;
 	
 };
