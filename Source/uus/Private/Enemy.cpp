@@ -17,6 +17,8 @@ AEnemy::AEnemy()
 
 	Health = 1;
 	CanDropItems = true;
+
+	LoSDistance = 500;
 }
 
 // Called when the game starts or when spawned
@@ -74,8 +76,8 @@ bool AEnemy::LookForPlayer()
 	FVector DistanceVector = PlayerLocation - EnemyLocation;
 
 	// if player is within "sight" range(400)
-	if (DistanceVector.X < 500 && DistanceVector.X > -500 &&
-		DistanceVector.Z < 500 && DistanceVector.Z > -500)
+	if (DistanceVector.X < LoSDistance && DistanceVector.X > -LoSDistance &&
+		DistanceVector.Z < LoSDistance && DistanceVector.Z > -LoSDistance)
 	{
 		if (EnemyState == EEnemyState::Idle)
 		{

@@ -65,6 +65,9 @@ protected:
 	UPROPERTY(EditAnyWhere, BluePrintReadWrite)
 	int32 Damage;
 
+	UPROPERTY(EditAnywhere)
+	float LoSDistance;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool PlayerFound;
 

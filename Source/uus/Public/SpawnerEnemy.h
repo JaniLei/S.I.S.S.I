@@ -27,8 +27,6 @@ public:
 	UPROPERTY(EditAnyWhere, Category = "Spawning")
 	int32 EnemiesToSpawn;
 
-	UPROPERTY(EditAnywhere, Category = "Spawning")
-	float LoSDistance;
 	/** Seconds between enemy spawns*/
 	UPROPERTY(EditAnywhere, Category = "Spawning")
 	float SpawnInterval;
