@@ -17,7 +17,7 @@ void AUsablePickUp::OnPlayerEnterPickUpBox(UPrimitiveComponent* OverlappedComp, 
 		SetLifeSpan(0);
 		PlayerCharacter->AddUsableItem(this);
 		// clear despawn timer
-		// disable components instead
+		// disable components
 		//PickUpRoot->Deactivate();
 		//PickUpBox->Deactivate();
 		//PickUpSprite->SetVisibility(false);
