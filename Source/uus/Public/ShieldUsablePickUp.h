@@ -14,6 +14,8 @@ UCLASS()
 class UUS_API AShieldUsablePickUp : public AUsablePickUp
 {
 	GENERATED_BODY()
+
+	AShieldUsablePickUp();
 	
 public:
 

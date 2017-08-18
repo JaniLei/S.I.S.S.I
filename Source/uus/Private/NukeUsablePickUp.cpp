@@ -6,6 +6,11 @@
 #include "Kismet/GameplayStatics.h"
 
 
+ANukeUsablePickUp::ANukeUsablePickUp()
+{
+	PickUpName = "Nuke";
+}
+
 void ANukeUsablePickUp::UseItem()
 {
 	Super::UseItem();
