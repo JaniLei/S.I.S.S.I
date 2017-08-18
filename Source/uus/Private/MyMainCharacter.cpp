@@ -99,6 +99,15 @@ FRotator AMyMainCharacter::GetAimDirection()
 		TestRot.Pitch = 0;
 	}
 
+	if (MousePosition.X < PlayerOnScreen.X)
+	{
+		SetActorRotation(FRotator(0, 180, 0));
+	}
+	else
+	{
+		SetActorRotation(FRotator(0, 0, 0));
+	}
+
 	//FVector Pos;
 	//FVector Dir;
 	//PC->DeprojectMousePositionToWorld(Pos, Dir);
