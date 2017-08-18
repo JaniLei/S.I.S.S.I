@@ -20,7 +20,7 @@ public:
 
 	bool IsUsed;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString PickUpName;
 	
 protected:
