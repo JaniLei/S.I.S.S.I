@@ -14,6 +14,8 @@ class UUS_API ANukeUsablePickUp : public AUsablePickUp
 {
 	GENERATED_BODY()
 
+	ANukeUsablePickUp();
+
 
 public:
 

@@ -3,6 +3,11 @@
 #include "ShieldUsablePickUp.h"
 
 
+AShieldUsablePickUp::AShieldUsablePickUp()
+{
+	PickUpName = "Shield";
+}
+
 void AShieldUsablePickUp::UseItem()
 {
 	Super::UseItem();
